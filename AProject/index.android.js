@@ -1,7 +1,7 @@
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
- * @flow
+ * @LichAmnesia
  */
 
 import React, { Component } from 'react';
@@ -9,13 +9,41 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Image,
 } from 'react-native';
 
-class AProject extends Component {
+class Greeting extends Component {
   render() {
     return (
+      <Text>Hello {this.props.name}!</Text>
+    );
+  }
+}
+class Blink extends Component{
+	constructor(props){
+		super(props);
+		this.state = {showText: true};
+
+		setInterval(() => {
+			this.setState({ showText: !this.state.showText });
+		}, 3000);
+  }
+  render(){
+  	let display = this.state.showText ? this.props.text : ' ';
+  	return (
+  		<Text style={styles.welcome}>{display}</Text>
+  	);
+  }
+}
+class AProject extends Component {
+  render() {
+    let pic = {
+        uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
+    };
+    return (
       <View style={styles.container}>
+        <Image source={pic} style={{width: 193, height: 110}}/>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
@@ -27,7 +55,12 @@ class AProject extends Component {
           Shake or press menu button for dev menu
           SB Windows
         </Text>
+        <Greeting name='Rexxar' />
+        <Greeting name='Jaina' />
+        <Greeting name='Valeera' />
+        <Blink  text='This is will blink every 3 seconds.'/>
       </View>
+
     );
   }
 }
